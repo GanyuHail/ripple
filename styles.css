@@ -4,3 +4,15 @@ html, body {
 	overflow: hidden;
 	position: fixed;
 }
+
+
+
+canvas {
+    display: block; width: 100vw; height: 100vh;
+    cursor: grab;
+}
+
+a {
+    position: fixed; top: 0; left: 0;
+    padding: 5vmin;
+}
