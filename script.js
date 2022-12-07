@@ -38,15 +38,15 @@ renderer.setAnimationLoop(() => {
 // Main
 // ---- 
 
-const SZ = 32; // dim = SZ * SZ
-const ISZ = 2; // item sz
+const SZ = 50; // dim = SZ * SZ
+const ISZ = 4; // item sz
 
-scene.background = new $.Color('white');
+scene.background = new $.Color('pink');
 camera.position.set(-30, 20, -30);
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.2;
+// controls.autoRotate = false;
+// controls.autoRotateSpeed = 0.2;
 
-const light = new $.DirectionalLight('white', 1);
+const light = new $.DirectionalLight('pink', 1);
 scene.add(light);
 
 class Inst { //// 3js inst wrapper for gsap
@@ -70,7 +70,7 @@ class Inst { //// 3js inst wrapper for gsap
     _updateColor() {
         this.mesh.setColorAt(this.idx, this.color);
         this.mesh.instanceColor.needsUpdate = true;
-        this._setY((this.$r * 0.3 + this.$g * 0.5 + this.$b * 0.2) ** 4 * 100);
+        this._setY((this.$r * 0.5 + this.$g * 0.5 + this.$b * 0.2) ** 4 * 100);
     }
     _updateMatrix() {
         this.mesh.setMatrixAt(this.idx, this.matrix);
@@ -108,13 +108,13 @@ gsap.timeline({
     repeat: -1, yoyo: true, // =infinite alternate
     defaults: {
         stagger: {
-            amount: 1, // =duration
+            amount: 10, // =duration
             grid: [SZ, SZ], from: 'center' // =ripple 
         },
-        ease: 'bounce'
+        ease: 'expo'
     }
 })
-    .to(insts, { $r: 0.2, $g: 'random(0, 0.5)', $b: 1 }) // random str
+    .to(insts, { $r: 0.2, $g: 0.2, $b: 1 }) // random str
     .to(insts, { $r: (i) => i / (SZ * SZ), $g: 0.2, $b: 0.8 }) // fn-based
 
 //// PostProcessing
